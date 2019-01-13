@@ -1,7 +1,6 @@
 #ifndef STRV_DRAWSIXEL_HPP
 #define STRV_DRAWSIXEL_HPP
 
-#include <boost/gil.hpp>
 #include <vector>
 #include <string>
 #include <iostream>

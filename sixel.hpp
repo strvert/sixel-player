@@ -2,6 +2,10 @@
 #define STRV_SIXEL_HPP
 
 #include <vector>
+#include <opencv2/core/core.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 struct Palette {
     unsigned char R;

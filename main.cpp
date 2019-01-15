@@ -7,4 +7,5 @@ int main(int argc, char** argv){
     SixelUtil::loadImage(argv[1]);
 
     Sixel s;
+
 }

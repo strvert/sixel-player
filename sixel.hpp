@@ -15,8 +15,8 @@ struct Palette {
 
 class Sixel {
     private:
-        std::vector<unsigned char> rawdata;
-        std::vector<Palette> palettes;
+        std::string rawdata;
+        std::vector<cv::Vec3b> palettes;
         int width;
         int height;
 
@@ -30,6 +30,10 @@ class Sixel {
         }
 
         void loadImage() {
+        }
+
+        void pushPalette(cv::Vec3b palette) {
+            palettes.push_back(palette);
         }
 };
 

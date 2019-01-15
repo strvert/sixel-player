@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <algorithm>
 #include <iostream>
 
 #include "sixel.hpp"
@@ -18,6 +19,19 @@ class SixelUtil{
 
         static void endSixel() {
             std::cout << ST;
+        }
+
+        template <typename T>
+        static int vectorFinder(std::vector<T> vec, T elm) {
+            auto itr = std::find(vec.begin(), vec.end(), elm);
+            size_t index = std::distance(vec.begin(), itr);
+            if (index != vec.size()) {
+                std::cout << 1;
+                return 1;
+            }else{
+                std::cout << 0;
+                return 0;
+            }
         }
 
     public:
@@ -48,20 +62,27 @@ class SixelUtil{
             const int channels = img.channels();
             const int cols = img.cols;
             const int rows = img.rows;
+            const int step = img.step;
 
             if (img.depth() != CV_8U) {
                 img.convertTo(img, CV_8U, 1.0/255);
             }
             cv::split(img, planes);
 
-            std::cout << planes[0] << std::endl;
-            std::cout << planes[1] << std::endl;
-            std::cout << planes[2] << std::endl;
+            std::vector<cv::Vec3b> palettes;
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
+                    palettes.push_back(img.at<cv::Vec3b>(row, col));
+                }
+            }
 
-            std::cout << img.depth() << CV_8U << std::endl;
+            std::cout << std::endl;
+            for (auto p: palettes) {
+                std::cout << p << std::endl;
+            }
 
-            cv::imshow("image", img);
-            cv::waitKey(0);
+            //cv::imshow("image", img);
+            //cv::waitKey(0);
 
             return ret;
         }

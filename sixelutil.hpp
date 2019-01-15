@@ -35,22 +35,35 @@ class SixelUtil{
         }
 
         static Sixel loadImageFromRaw() {
+            Sixel ret;
 
+            return ret;
         }
 
         static Sixel loadImage(std::string img_path) {
-            cv::Mat img = cv::imread(img_path, IMREAD_COLOR);
+            Sixel ret;
+            std::vector<cv::Mat> planes;
+
+            cv::Mat img = cv::imread(img_path, cv::IMREAD_UNCHANGED);
             const int channels = img.channels();
             const int cols = img.cols;
             const int rows = img.rows;
-            unsigned char *pixel_ptr = image.data;
 
-            for (int row = 0; i < rows; row++) {
-                for (int col = 0; i < cols; col++) {
-                    const int pi = row*cols*channels + col*channels;
-                }
+            if (img.depth() != CV_8U) {
+                img.convertTo(img, CV_8U, 1.0/255);
             }
+            cv::split(img, planes);
 
+            std::cout << planes[0] << std::endl;
+            std::cout << planes[1] << std::endl;
+            std::cout << planes[2] << std::endl;
+
+            std::cout << img.depth() << CV_8U << std::endl;
+
+            cv::imshow("image", img);
+            cv::waitKey(0);
+
+            return ret;
         }
 };
 
